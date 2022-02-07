@@ -1,16 +1,16 @@
 using System.Collections.Generic;
+using System;
 
-namespace Filmstudion.Models
+namespace Filmstudion.api.Models
 {
-    public class Film
+    public class Film : IFilm
     {
-        public int FilmId {get; set;}
-        public string Name {get; set;}
-        public string Director {get; set;}
-        public string Country {get; set;}
-        public int ReleaseYear {get; set;}
-        public IEnumerable<FilmCopy> FilmCopy {get; set;}
-        public int MaxNumber {get; set;}
+    public string FilmId { get; set; }
+    public string Name { get; set; }
+    public DateTime ReleaseDate { get; set; }
+    public string Country { get; set; }
+    public string Director { get; set; }
+    public List<FilmCopy> FilmCopies { get; set; }
 
     }
 }
