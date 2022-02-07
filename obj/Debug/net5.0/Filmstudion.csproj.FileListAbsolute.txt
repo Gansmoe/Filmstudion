@@ -1,0 +1,7 @@
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.csproj.AssemblyReference.cache
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.AssemblyInfoInputs.cache
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.AssemblyInfo.cs
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.csproj.CoreCompileInputs.cache
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Isac\Documents\Skola\Dynamiska Webbsystem 2\submits\Filmstudion\Filmstudion\obj\Debug\net5.0\Filmstudion.MvcApplicationPartsAssemblyInfo.cache
