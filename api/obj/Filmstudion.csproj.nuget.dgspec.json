@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\Filmstudion.csproj": {}
+    "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\Filmstudion.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\Filmstudion.csproj": {
+    "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\Filmstudion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\Filmstudion.csproj",
+        "projectUniqueName": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\Filmstudion.csproj",
         "projectName": "Filmstudion",
-        "projectPath": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\Filmstudion.csproj",
+        "projectPath": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\Filmstudion.csproj",
         "packagesPath": "C:\\Users\\Isac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\obj\\",
+        "outputPath": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Isac\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,26 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
