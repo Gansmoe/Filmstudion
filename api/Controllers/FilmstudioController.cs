@@ -20,15 +20,15 @@ namespace Filmstudion.api.Controllers
 
         
         [HttpPost("register")]
-        public async Task<ActionResult<Filmstudio>> Register(Filmstudio model)
+        public async Task<ActionResult<Filmstudio>> Register(RegisterFilmStudio model)
         {
             try
             {
-                //var filmstudio = _mapper.Map<Filmstudio>(model);
-                _filmstudioRepository.Add(model);
+                var filmstudio = _mapper.Map<Filmstudio>(model);
+                _filmstudioRepository.Add(filmstudio);
                 if (await _filmstudioRepository.SaveChangesAsync())
                 {
-                    return Ok(model);
+                    return Ok(filmstudio);
                 }
                 
             }

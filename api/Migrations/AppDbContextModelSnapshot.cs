@@ -21,10 +21,16 @@ namespace Filmstudion.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("City")
+                    b.Property<string>("FilmStudioCity")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FilmStudioName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("FilmStudioId");
@@ -35,8 +41,10 @@ namespace Filmstudion.Migrations
                         new
                         {
                             FilmStudioId = 1,
-                            City = "Göteborg",
-                            Name = "Testis"
+                            FilmStudioCity = "Göteborg",
+                            FilmStudioName = "Testis",
+                            Password = "Hej",
+                            Username = "Olle"
                         });
                 });
 #pragma warning restore 612, 618

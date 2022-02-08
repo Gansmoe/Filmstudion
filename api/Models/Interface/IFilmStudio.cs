@@ -8,8 +8,10 @@ namespace Filmstudion.api.Models
   interface IFilmStudio
   {
     public int FilmStudioId { get; set; }
-    public string Name { get; set; }
-    public string City { get; set; }
+    public string FilmStudioCity { get; set; }
+    public string FilmStudioName { get; set; }
+    public string Password { get; set; }
+    public string Username { get; set; }
 
   }
 }

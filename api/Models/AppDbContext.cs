@@ -17,8 +17,10 @@ namespace Filmstudion.api.Models
         builder.Entity<Filmstudio>().HasData(new Filmstudio
         {
             FilmStudioId = 1,
-            Name = "Testis",
-            City = "Göteborg",
+            FilmStudioName = "Testis",
+            FilmStudioCity = "Göteborg",
+            Password = "Hej",
+            Username = "Olle",
         });
     }
     }

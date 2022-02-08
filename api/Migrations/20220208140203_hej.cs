@@ -12,8 +12,10 @@ namespace Filmstudion.Migrations
                 {
                     FilmStudioId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true)
+                    FilmStudioCity = table.Column<string>(type: "TEXT", nullable: true),
+                    FilmStudioName = table.Column<string>(type: "TEXT", nullable: true),
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
+                    Username = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -22,8 +24,8 @@ namespace Filmstudion.Migrations
 
             migrationBuilder.InsertData(
                 table: "Filmstudios",
-                columns: new[] { "FilmStudioId", "City", "Name" },
-                values: new object[] { 1, "Göteborg", "Testis" });
+                columns: new[] { "FilmStudioId", "FilmStudioCity", "FilmStudioName", "Password", "Username" },
+                values: new object[] { 1, "Göteborg", "Testis", "Hej", "Olle" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
