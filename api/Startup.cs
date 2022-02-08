@@ -41,6 +41,7 @@ namespace Filmstudion
             });
 
             services.AddScoped<IFilmStudioRepository, FilmStudioRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

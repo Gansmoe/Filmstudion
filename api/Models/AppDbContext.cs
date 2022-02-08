@@ -5,6 +5,7 @@ namespace Filmstudion.api.Models
     public class AppDbContext : DbContext
     {
         public DbSet<Filmstudio> Filmstudios {get; set;}
+        public DbSet<User> Users { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) => this.Database.EnsureCreated();
@@ -21,6 +22,14 @@ namespace Filmstudion.api.Models
             FilmStudioCity = "Göteborg",
             Password = "Hej",
             Username = "Olle",
+        });
+        builder.Entity<User>().HasData(new User
+        {
+            UserId = 1,
+            IsAdmin = true,
+            Username = "Göttwald",
+            Role = "Admin",
+            Password = "hejhej",
         });
     }
     }

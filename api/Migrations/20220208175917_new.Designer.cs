@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Filmstudion.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220208140203_hej")]
-    partial class hej
+    [Migration("20220208175917_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,39 @@ namespace Filmstudion.Migrations
                             FilmStudioName = "Testis",
                             Password = "Hej",
                             Username = "Olle"
+                        });
+                });
+
+            modelBuilder.Entity("Filmstudion.api.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            IsAdmin = true,
+                            Password = "hejhej",
+                            Role = "Admin",
+                            Username = "Göttwald"
                         });
                 });
 #pragma warning restore 612, 618
