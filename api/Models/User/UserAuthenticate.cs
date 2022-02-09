@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Filmstudion.api.Models
 {
 
-    interface IUserAuthenticate
+    public class UserAuthenticate
     {
       public bool IsAdmin { get; set; }
       public string Username { get; set; }

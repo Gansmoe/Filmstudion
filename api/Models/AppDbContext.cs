@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Filmstudion.api.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Filmstudio> Filmstudios {get; set;}
         public DbSet<User> Users { get; set; }

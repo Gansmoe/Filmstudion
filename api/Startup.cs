@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Filmstudion.api.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Filmstudion
 {
@@ -29,6 +30,12 @@ namespace Filmstudion
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>();
+
+            services.AddAuthentication()
+            .AddCookie()
+            .AddJwtBearer();
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             
@@ -63,8 +70,9 @@ namespace Filmstudion
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();            
+            app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
