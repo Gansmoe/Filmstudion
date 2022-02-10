@@ -9,5 +9,7 @@ namespace Filmstudion.api.Models
         void Add<T>(T entity) where T : class;
 
         Task<bool> SaveChangesAsync();
+        Task<IEnumerable<Filmstudio>> ListAsync();
+        Task<Filmstudio> FilmstudioAsync(int id);
     }
 }

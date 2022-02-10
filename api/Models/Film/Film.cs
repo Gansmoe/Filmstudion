@@ -5,7 +5,7 @@ namespace Filmstudion.api.Models
 {
     public class Film : IFilm
     {
-    public string FilmId { get; set; }
+    public int FilmId { get; set; }
     public string Name { get; set; }
     public DateTime ReleaseDate { get; set; }
     public string Country { get; set; }

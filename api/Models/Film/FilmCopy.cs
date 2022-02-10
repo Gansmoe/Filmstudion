@@ -4,7 +4,7 @@ namespace Filmstudion.api.Models
     {
 
     public int FilmCopyId { get; set; }
-    public string FilmId { get; set; }
+    public int FilmId { get; set; }
     public bool RentedOut { get; set; }
     public string FilmStudioId { get; set; }
     }

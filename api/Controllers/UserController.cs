@@ -1,11 +1,14 @@
 using System;
+using System.Text;
 using Filmstudion.api.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Filmstudion.api.Controllers
 {
@@ -17,11 +20,15 @@ namespace Filmstudion.api.Controllers
         private readonly IMapper _mapper;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly IConfiguration _config;
+        private readonly AppDbContext _appDbContext;
 
-        public UserController(IUserRepository userRepository, IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager)
+        public UserController(IUserRepository userRepository, IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager, IConfiguration config, AppDbContext appDbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _config = config;
+            _appDbContext = appDbContext;
             _userRepository = userRepository;
             _mapper = mapper;
         }
@@ -41,8 +48,10 @@ namespace Filmstudion.api.Controllers
                 {
                     user.Role ="User";
                 }
-                _userRepository.Add(user);
-                if (await _userRepository.SaveChangesAsync())
+                //_userRepository.Add(user);
+                var result = await _userManager.CreateAsync(user, model.Password);
+                
+                if (result.Succeeded)
                 {
 
                     var userDTO = _mapper.Map<UserResource>(user);
@@ -58,7 +67,7 @@ namespace Filmstudion.api.Controllers
                 }
                 
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                return this.StatusCode(500, "Database Failure");
             }
@@ -66,12 +75,12 @@ namespace Filmstudion.api.Controllers
             
         }
 
-        [HttpPost]
+        [HttpPost("authenticate")]
         public async Task<IActionResult> CreateToken(UserAuthenticate model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Username);
+                var user = await _userManager.FindByNameAsync(model.UserName);
 
                 if (user != null)
                 {
@@ -81,11 +90,28 @@ namespace Filmstudion.api.Controllers
                     {
                         var claims = new[]
                         {
-                            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
                         };
-                        
+
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+                        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                        var token = new JwtSecurityToken(
+                            _config["Tokens:Issuer"],
+                            _config["Tokens:Audience"], 
+                            claims, signingCredentials: creds,
+                            expires: DateTime.UtcNow.AddMinutes(20));
+
+                        var userDTO = _mapper.Map<UserResource>(user);
+
+                        return Created("", new
+                        {
+                            userDTO,
+                            token = new JwtSecurityTokenHandler().WriteToken(token),
+                            expiration = token.ValidTo
+                        }) ;
                     }
                 }
             }

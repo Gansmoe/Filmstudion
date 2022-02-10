@@ -7,6 +7,7 @@ namespace Filmstudion.api.Models
         public FilmStudioProfile()
         {
             this.CreateMap<RegisterFilmStudio, Filmstudio>();
+            this.CreateMap<Filmstudio, FilmStudioReturn>();
         }
     }
 }

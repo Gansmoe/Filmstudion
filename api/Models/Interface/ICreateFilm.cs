@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Filmstudion.api.Models
 {
-  public interface ICreateFilmModel
+  public interface ICreateFilm
   {
     public string Name { get; set; }
     public DateTime ReleaseDate { get; set; }

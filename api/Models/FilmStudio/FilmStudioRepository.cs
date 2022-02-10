@@ -27,6 +27,17 @@ namespace Filmstudion.api.Models
         {
             return (await _appDbContext.SaveChangesAsync()) > 0;
         }
-        
+
+        public async Task<IEnumerable<Filmstudio>> ListAsync()
+        {
+            return await _appDbContext.Filmstudios.ToListAsync();
+        }
+
+        public async Task<Filmstudio> FilmstudioAsync(int id)
+        {
+            IQueryable<Filmstudio> query = _appDbContext.Filmstudios.Where(r => r.FilmStudioId == id);
+            return await query.FirstOrDefaultAsync();
+        }
+
     }
 }

@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Filmstudion.api.Models
 {
     public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Filmstudio> Filmstudios {get; set;}
-        public DbSet<User> Users { get; set; }
+        public DbSet<Film> Films {get; set;}
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) => this.Database.EnsureCreated();
@@ -24,14 +25,27 @@ namespace Filmstudion.api.Models
             Password = "Hej",
             Username = "Olle",
         });
-        builder.Entity<User>().HasData(new User
-        {
-            UserId = 1,
-            IsAdmin = true,
-            Username = "Göttwald",
-            Role = "Admin",
-            Password = "hejhej",
-        });
+
+
+            builder.Entity<User>().HasData(new User
+            {
+                Id = "1",
+                Email = "hej@hej.se",
+                IsAdmin = true,
+                UserName = "Göttwald",
+                Role = "Admin",
+
+            });
+
+            builder.Entity<Film>().HasData(new Film
+            {
+                FilmId = 1,
+                FilmCopies = new List<FilmCopy>(),
+                Country = "Swe",
+                Director = "Kalle",
+                Name = "HejHej",
+                ReleaseDate = System.DateTime.Now
+            });
     }
     }
 }

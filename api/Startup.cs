@@ -15,14 +15,20 @@ using Microsoft.OpenApi.Models;
 using Filmstudion.api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 namespace Filmstudion
 {
     public class Startup
     {
+        private readonly IConfiguration _config;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _config = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -30,18 +36,31 @@ namespace Filmstudion
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole>();
-
-            services.AddAuthentication()
-            .AddCookie()
-            .AddJwtBearer();
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             
             
+            services.AddIdentity<User, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<AppDbContext>();
 
-            
+            services.AddAuthentication()
+            .AddCookie()
+            .AddJwtBearer(cfg =>
+            {
+                cfg.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = _config["Tokens:Issuer"],
+                    ValidAudience = _config["Tokens:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                };
+            });
+
+
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Filmstudion", Version = "v1" });
@@ -49,6 +68,7 @@ namespace Filmstudion
 
             services.AddScoped<IFilmStudioRepository, FilmStudioRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFilmRepository, FilmRepository>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
