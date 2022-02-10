@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Filmstudion.api.Models
@@ -13,5 +14,7 @@ namespace Filmstudion.api.Models
         IEnumerable<Film> AllFilms { get; }
 
         Task<IEnumerable<Film>> ListAsync();
+        Task<Film> FilmAsync(int id);
+        Task UpdateFilmAsync(Film film, JsonPatchDocument model);
     }
 }

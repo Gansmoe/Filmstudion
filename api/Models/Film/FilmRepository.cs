@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Filmstudion.api.Models
@@ -50,6 +52,19 @@ namespace Filmstudion.api.Models
         public async Task<IEnumerable<Film>> ListAsync()
         {
             return await _appDbContext.Films.ToListAsync();
+        }
+
+        public async Task<Film> FilmAsync(int id)
+        {
+            IQueryable<Film> query = _appDbContext.Films.Where(r => r.FilmId == id);
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateFilmAsync(Film film, JsonPatchDocument model)
+        {
+            model.ApplyTo(film);
+            await _appDbContext.SaveChangesAsync();
+
         }
 
     }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hagpRQowDyJ++DJYvOvUfXZWo1VZZylDy4f2SUYnDuGqUSQbyEh359NRcuvCuk8lUMqNf97fAvJzjXiKtTFysA==",
+  "dgSpecHash": "VwdcViznNvbj9qAKKomua3/jqGCiF8vVaR2fbm/pP+R8PkS2WsTITPYM6nKu04rd1+2qoJBhzc0guQL+/ZaJLw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\Filmstudion.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,8 @@
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.13\\microsoft.aspnetcore.cryptography.internal.5.0.13.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.13\\microsoft.aspnetcore.cryptography.keyderivation.5.0.13.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.13\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.13.nupkg.sha512",
+    "C:\\Users\\Isac\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.13\\microsoft.aspnetcore.jsonpatch.5.0.13.nupkg.sha512",
+    "C:\\Users\\Isac\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.13\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.13.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.13\\microsoft.data.sqlite.core.5.0.13.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
@@ -41,6 +43,8 @@
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.7.1\\microsoft.identitymodel.protocols.openidconnect.6.7.1.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.7.1\\microsoft.identitymodel.tokens.6.7.1.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Isac\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Isac\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",

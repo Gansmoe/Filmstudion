@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Filmstudion.Controllers
 {
@@ -54,6 +55,34 @@ namespace Filmstudion.Controllers
         {
             var films = await _filmRepository.ListAsync();
             return Ok(films);
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<Film>> GetFilm(int id)
+        {
+            var film = await _filmRepository.FilmAsync(id);
+            //var filmstudio = _mapper.Map<FilmStudioReturn>(model);
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(film);
+        }
+
+        [HttpPatch("{Id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult> PatchFilm(int id, JsonPatchDocument model)
+        {
+            var film = await _filmRepository.FilmAsync(id);
+            if (film == null)
+            {
+                return NotFound();
+            }
+            await _filmRepository.UpdateFilmAsync(film, model);
+            var updatedFilm = await _filmRepository.FilmAsync(id);
+            return Ok(updatedFilm);
+
         }
     }
 }
