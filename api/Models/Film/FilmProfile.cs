@@ -7,7 +7,6 @@ namespace Filmstudion.api.Models
         public FilmProfile()
         {
             this.CreateMap<CreateFilm, Film>();
-            //this.CreateMap<User, UserResource>();
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Filmstudion.Migrations
                             Country = "Swe",
                             Director = "Kalle",
                             Name = "HejHej",
-                            ReleaseDate = new DateTime(2022, 2, 9, 20, 50, 40, 856, DateTimeKind.Local).AddTicks(3148)
+                            ReleaseDate = new DateTime(2022, 2, 10, 14, 16, 52, 818, DateTimeKind.Local).AddTicks(8378)
                         });
                 });
 
@@ -55,11 +55,17 @@ namespace Filmstudion.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FilmId")
+                    b.Property<int?>("FilmId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("FilmStudioId")
+                    b.Property<int>("FilmsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FilmsStudioId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("FilmstudioId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("RentedOut")
                         .HasColumnType("INTEGER");
@@ -68,12 +74,14 @@ namespace Filmstudion.Migrations
 
                     b.HasIndex("FilmId");
 
+                    b.HasIndex("FilmstudioId");
+
                     b.ToTable("FilmCopy");
                 });
 
             modelBuilder.Entity("Filmstudion.api.Models.Filmstudio", b =>
                 {
-                    b.Property<int>("FilmStudioId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -89,20 +97,24 @@ namespace Filmstudion.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("StudioIdentifier")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("FilmStudioId");
+                    b.HasKey("Id");
 
                     b.ToTable("Filmstudios");
 
                     b.HasData(
                         new
                         {
-                            FilmStudioId = 1,
+                            Id = 1,
                             FilmStudioCity = "Göteborg",
                             FilmStudioName = "Testis",
                             Password = "Hej",
+                            StudioIdentifier = "1",
                             Username = "Olle"
                         });
                 });
@@ -124,6 +136,12 @@ namespace Filmstudion.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FilmStudioId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("FilmStudioId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsAdmin")
@@ -167,6 +185,8 @@ namespace Filmstudion.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FilmStudioId1");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -181,14 +201,15 @@ namespace Filmstudion.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03ea18e2-3392-45bb-bbb7-1b5948148295",
+                            ConcurrencyStamp = "14506b8f-3185-4aed-8e8c-512fe265b219",
                             Email = "hej@hej.se",
                             EmailConfirmed = false,
+                            FilmStudioId = "1",
                             IsAdmin = true,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "0ead947b-e7e0-419b-99f5-4cae8504652d",
+                            SecurityStamp = "612f2a42-2b66-4b80-98b5-94e1b9b7d11f",
                             TwoFactorEnabled = false,
                             UserName = "Göttwald"
                         });
@@ -326,9 +347,20 @@ namespace Filmstudion.Migrations
                 {
                     b.HasOne("Filmstudion.api.Models.Film", null)
                         .WithMany("FilmCopies")
-                        .HasForeignKey("FilmId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FilmId");
+
+                    b.HasOne("Filmstudion.api.Models.Filmstudio", null)
+                        .WithMany("RentedFilmCopies")
+                        .HasForeignKey("FilmstudioId");
+                });
+
+            modelBuilder.Entity("Filmstudion.api.Models.User", b =>
+                {
+                    b.HasOne("Filmstudion.api.Models.Filmstudio", "FilmStudio")
+                        .WithMany()
+                        .HasForeignKey("FilmStudioId1");
+
+                    b.Navigation("FilmStudio");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -385,6 +417,11 @@ namespace Filmstudion.Migrations
             modelBuilder.Entity("Filmstudion.api.Models.Film", b =>
                 {
                     b.Navigation("FilmCopies");
+                });
+
+            modelBuilder.Entity("Filmstudion.api.Models.Filmstudio", b =>
+                {
+                    b.Navigation("RentedFilmCopies");
                 });
 #pragma warning restore 612, 618
         }

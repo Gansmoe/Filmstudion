@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VwdcViznNvbj9qAKKomua3/jqGCiF8vVaR2fbm/pP+R8PkS2WsTITPYM6nKu04rd1+2qoJBhzc0guQL+/ZaJLw==",
+  "dgSpecHash": "4U17ycew5/qUaS2117aHkepPmQtxg1w59zqefDr3U/PaKHkSoBk5ueEJ7iWLjCyondWH+29gv3D8vOc/KIukiA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Isac\\Documents\\Skola\\Dynamiska Webbsystem 2\\submits\\Filmstudion\\Filmstudion\\api\\Filmstudion.csproj",
   "expectedPackageFiles": [
@@ -59,7 +59,8 @@
     "C:\\Users\\Isac\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.7.1\\system.identitymodel.tokens.jwt.6.7.1.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\Isac\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\Isac\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512"
+    "C:\\Users\\Isac\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "C:\\Users\\Isac\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
   ],
   "logs": []
 }

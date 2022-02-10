@@ -58,9 +58,6 @@ namespace Filmstudion
                 };
             });
 
-
-
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Filmstudion", Version = "v1" });
@@ -69,6 +66,8 @@ namespace Filmstudion
             services.AddScoped<IFilmStudioRepository, FilmStudioRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFilmRepository, FilmRepository>();
+
+            services.AddCors(options => options.AddPolicy("AllowEverything", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -84,11 +83,12 @@ namespace Filmstudion
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Filmstudion v1"));
             }
-            app.UseCors(x => x
-            .SetIsOriginAllowed(origin => true)
-            .AllowCredentials());
+            app.UseCors("AllowEverything");
 
             app.UseHttpsRedirection();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
 

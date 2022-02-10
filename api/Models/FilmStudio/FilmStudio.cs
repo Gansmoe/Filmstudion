@@ -4,8 +4,8 @@ namespace Filmstudion.api.Models
 {
     public class Filmstudio : IFilmStudio
     {
-
-        public int FilmStudioId { get; set; }
+        public int Id { get; set; }
+        public string StudioIdentifier { get; set; }
         public string FilmStudioCity { get; set; }
         public string FilmStudioName { get; set; }
         public string Role { get; set; }

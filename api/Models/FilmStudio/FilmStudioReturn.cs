@@ -2,8 +2,9 @@
 {
     public class FilmStudioReturn
     {
-        public int FilmStudioId { get; set; }
+        public int Id { get; set; }
         public string FilmStudioName { get; set; }
+        public string StudioIdentifier { get; set; }
         public string Role { get; set; }
         public string Username { get; set; }
     }

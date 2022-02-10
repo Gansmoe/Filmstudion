@@ -32,9 +32,9 @@ namespace Filmstudion.api.Models
             {
                 Random rnd = new Random();
                 var filmCopy = new FilmCopy();
-                filmCopy.FilmId = film.FilmId;
+                filmCopy.FilmsId = film.FilmId;
                 filmCopy.RentedOut = false;
-                filmCopy.FilmStudioId = "";
+                filmCopy.FilmsStudioId = "";
                 filmCopy.FilmCopyId = rnd.Next(1, 999999);
                 film.FilmCopies.Add(filmCopy);
             }

@@ -19,7 +19,8 @@ namespace Filmstudion.api.Models
 
         builder.Entity<Filmstudio>().HasData(new Filmstudio
         {
-            FilmStudioId = 1,
+            Id = 1,
+            StudioIdentifier = "1",
             FilmStudioName = "Testis",
             FilmStudioCity = "Göteborg",
             Password = "Hej",
@@ -32,6 +33,7 @@ namespace Filmstudion.api.Models
                 Id = "1",
                 Email = "hej@hej.se",
                 IsAdmin = true,
+                FilmStudioId = "1",
                 UserName = "Göttwald",
                 Role = "Admin",
 

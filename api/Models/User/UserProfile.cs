@@ -8,6 +8,7 @@ namespace Filmstudion.api.Models
         {
             this.CreateMap<UserRegister, User>();
             this.CreateMap<User, UserResource>();
+            this.CreateMap<User, FilmstudioUserResource>();
         }
     }
 }

@@ -6,8 +6,8 @@ namespace Filmstudion.api.Models
   {
 
     public int FilmCopyId { get; set; }
-    public int FilmId { get; set; }
+    public int FilmsId { get; set; }
     public bool RentedOut { get; set; }
-    public string FilmStudioId { get; set; }
+    public string FilmsStudioId { get; set; }
   }
 }

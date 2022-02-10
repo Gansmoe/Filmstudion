@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Filmstudion.Migrations
 {
-    public partial class hej : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,33 +19,6 @@ namespace Filmstudion.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Role = table.Column<string>(type: "TEXT", nullable: true),
-                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,8 +41,9 @@ namespace Filmstudion.Migrations
                 name: "Filmstudios",
                 columns: table => new
                 {
-                    FilmStudioId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    StudioIdentifier = table.Column<string>(type: "TEXT", nullable: true),
                     FilmStudioCity = table.Column<string>(type: "TEXT", nullable: true),
                     FilmStudioName = table.Column<string>(type: "TEXT", nullable: true),
                     Role = table.Column<string>(type: "TEXT", nullable: true),
@@ -78,7 +52,7 @@ namespace Filmstudion.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Filmstudios", x => x.FilmStudioId);
+                    table.PrimaryKey("PK_Filmstudios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,6 +74,70 @@ namespace Filmstudion.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Role = table.Column<string>(type: "TEXT", nullable: true),
+                    FilmStudioId = table.Column<string>(type: "TEXT", nullable: true),
+                    FilmStudioId1 = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Filmstudios_FilmStudioId1",
+                        column: x => x.FilmStudioId1,
+                        principalTable: "Filmstudios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FilmCopy",
+                columns: table => new
+                {
+                    FilmCopyId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FilmsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RentedOut = table.Column<bool>(type: "INTEGER", nullable: false),
+                    FilmsStudioId = table.Column<string>(type: "TEXT", nullable: true),
+                    FilmId = table.Column<int>(type: "INTEGER", nullable: true),
+                    FilmstudioId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FilmCopy", x => x.FilmCopyId);
+                    table.ForeignKey(
+                        name: "FK_FilmCopy_Films_FilmId",
+                        column: x => x.FilmId,
+                        principalTable: "Films",
+                        principalColumn: "FilmId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FilmCopy_Filmstudios_FilmstudioId",
+                        column: x => x.FilmstudioId,
+                        principalTable: "Filmstudios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,41 +225,20 @@ namespace Filmstudion.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "FilmCopy",
-                columns: table => new
-                {
-                    FilmCopyId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FilmId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RentedOut = table.Column<bool>(type: "INTEGER", nullable: false),
-                    FilmStudioId = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FilmCopy", x => x.FilmCopyId);
-                    table.ForeignKey(
-                        name: "FK_FilmCopy_Films_FilmId",
-                        column: x => x.FilmId,
-                        principalTable: "Films",
-                        principalColumn: "FilmId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsAdmin", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "03ea18e2-3392-45bb-bbb7-1b5948148295", "hej@hej.se", false, true, false, null, null, null, null, null, false, "Admin", "0ead947b-e7e0-419b-99f5-4cae8504652d", false, "Göttwald" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FilmStudioId", "FilmStudioId1", "IsAdmin", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, "14506b8f-3185-4aed-8e8c-512fe265b219", "hej@hej.se", false, "1", null, true, false, null, null, null, null, null, false, "Admin", "612f2a42-2b66-4b80-98b5-94e1b9b7d11f", false, "Göttwald" });
 
             migrationBuilder.InsertData(
                 table: "Films",
                 columns: new[] { "FilmId", "Country", "Director", "Name", "ReleaseDate" },
-                values: new object[] { 1, "Swe", "Kalle", "HejHej", new DateTime(2022, 2, 9, 20, 50, 40, 856, DateTimeKind.Local).AddTicks(3148) });
+                values: new object[] { 1, "Swe", "Kalle", "HejHej", new DateTime(2022, 2, 10, 14, 16, 52, 818, DateTimeKind.Local).AddTicks(8378) });
 
             migrationBuilder.InsertData(
                 table: "Filmstudios",
-                columns: new[] { "FilmStudioId", "FilmStudioCity", "FilmStudioName", "Password", "Role", "Username" },
-                values: new object[] { 1, "Göteborg", "Testis", "Hej", null, "Olle" });
+                columns: new[] { "Id", "FilmStudioCity", "FilmStudioName", "Password", "Role", "StudioIdentifier", "Username" },
+                values: new object[] { 1, "Göteborg", "Testis", "Hej", null, "1", "Olle" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -255,6 +272,11 @@ namespace Filmstudion.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_FilmStudioId1",
+                table: "AspNetUsers",
+                column: "FilmStudioId1");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -264,6 +286,11 @@ namespace Filmstudion.Migrations
                 name: "IX_FilmCopy_FilmId",
                 table: "FilmCopy",
                 column: "FilmId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FilmCopy_FilmstudioId",
+                table: "FilmCopy",
+                column: "FilmstudioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -287,9 +314,6 @@ namespace Filmstudion.Migrations
                 name: "FilmCopy");
 
             migrationBuilder.DropTable(
-                name: "Filmstudios");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -297,6 +321,9 @@ namespace Filmstudion.Migrations
 
             migrationBuilder.DropTable(
                 name: "Films");
+
+            migrationBuilder.DropTable(
+                name: "Filmstudios");
         }
     }
 }

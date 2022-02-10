@@ -35,7 +35,7 @@ namespace Filmstudion.api.Models
 
         public async Task<Filmstudio> FilmstudioAsync(int id)
         {
-            IQueryable<Filmstudio> query = _appDbContext.Filmstudios.Where(r => r.FilmStudioId == id);
+            IQueryable<Filmstudio> query = _appDbContext.Filmstudios.Where(r => r.Id == id);
             return await query.FirstOrDefaultAsync();
         }
 

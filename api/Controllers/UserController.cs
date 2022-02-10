@@ -9,6 +9,8 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Filmstudion.api.Controllers
 {
@@ -22,13 +24,21 @@ namespace Filmstudion.api.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _config;
         private readonly AppDbContext _appDbContext;
+        private readonly IFilmStudioRepository _filmStudioRepository;
 
-        public UserController(IUserRepository userRepository, IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager, IConfiguration config, AppDbContext appDbContext)
+        public UserController(IUserRepository userRepository,
+            IMapper mapper,
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
+            IConfiguration config,
+            AppDbContext appDbContext, 
+            IFilmStudioRepository filmStudioRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _config = config;
             _appDbContext = appDbContext;
+            _filmStudioRepository = filmStudioRepository;
             _userRepository = userRepository;
             _mapper = mapper;
         }
@@ -84,6 +94,19 @@ namespace Filmstudion.api.Controllers
 
                 if (user != null)
                 {
+                    
+                    if (user.FilmStudioId != null)
+                    {
+                        var filmstudio = _appDbContext.Filmstudios.Where(f => f.Username == user.UserName);
+
+                        if (filmstudio != null)
+                        {
+                            user.FilmStudio = await filmstudio.FirstOrDefaultAsync();
+                            user.Role = "Filmstudio";
+                            await _userRepository.SaveChangesAsync();
+                        }
+                    }
+
                     var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
 
                     if (result.Succeeded)
@@ -106,12 +129,25 @@ namespace Filmstudion.api.Controllers
 
                         var userDTO = _mapper.Map<UserResource>(user);
 
-                        return Created("", new
+                        if (user.FilmStudioId == null)
                         {
-                            userDTO,
-                            token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiration = token.ValidTo
-                        }) ;
+                            return Created("", new
+                            {
+                                userDTO,
+                                token = new JwtSecurityTokenHandler().WriteToken(token),
+                                expiration = token.ValidTo
+                            });
+                        }
+                        else
+                        {
+                            var filmstudioUser = _mapper.Map<FilmstudioUserResource>(user);
+                            return Created("", new
+                            {
+                                filmstudioUser,
+                                token = new JwtSecurityTokenHandler().WriteToken(token),
+                                expiration = token.ValidTo
+                            });
+                        }
                     }
                 }
             }
