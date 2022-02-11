@@ -50,29 +50,13 @@ namespace Filmstudion.api.Controllers
             try
             {
                 var user = _mapper.Map<User>(model);
-                if (model.IsAdmin == true)
-                {
-                    user.Role ="Admin";
-                }
-                else
-                {
-                    user.Role ="User";
-                }
-                //_userRepository.Add(user);
+                
                 var result = await _userManager.CreateAsync(user, model.Password);
                 
                 if (result.Succeeded)
                 {
 
                     var userDTO = _mapper.Map<UserResource>(user);
-                    if (user.IsAdmin == true)
-                    {
-                        userDTO.Role = "Admin";
-                    }
-                    else
-                    {
-                        userDTO.Role ="User";
-                    }
                     return Ok(userDTO);
                 }
                 
@@ -94,7 +78,7 @@ namespace Filmstudion.api.Controllers
 
                 if (user != null)
                 {
-                    
+
                     if (user.FilmStudioId != null)
                     {
                         var filmstudio = _appDbContext.Filmstudios.Where(f => f.Username == user.UserName);
@@ -105,6 +89,10 @@ namespace Filmstudion.api.Controllers
                             user.Role = "Filmstudio";
                             await _userRepository.SaveChangesAsync();
                         }
+                    }
+                    else if (user.IsAdmin == true)
+                    {
+                        user.Role = "Admin";
                     }
 
                     var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);

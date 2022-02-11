@@ -36,11 +36,11 @@ namespace Filmstudion.Controllers
                     var films = _filmRepository.AllFilms;
                     int count = films.Count();
                     film.FilmId = count + 1;
-                    var test = _filmRepository.AddCopiesList(model.NumberOfCopies, film);
-                    _filmRepository.Add(test);
+                    var filmWithCopies = _filmRepository.AddCopiesList(model.NumberOfCopies, film);
+                    _filmRepository.Add(filmWithCopies);
                     if (await _filmRepository.SaveChangesAsync())
                     {
-                        return Ok(test);
+                        return Ok(filmWithCopies);
                     }
                 }
                 catch (System.Exception ex)
@@ -61,7 +61,6 @@ namespace Filmstudion.Controllers
         public async Task<ActionResult<Film>> GetFilm(int id)
         {
             var film = await _filmRepository.FilmAsync(id);
-            //var filmstudio = _mapper.Map<FilmStudioReturn>(model);
             if (film == null)
             {
                 return NotFound();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Filmstudion.Migrations
 {
-    public partial class @new : Migration
+    public partial class hej : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -112,7 +112,7 @@ namespace Filmstudion.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FilmCopy",
+                name: "FilmCopies",
                 columns: table => new
                 {
                     FilmCopyId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -125,15 +125,15 @@ namespace Filmstudion.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FilmCopy", x => x.FilmCopyId);
+                    table.PrimaryKey("PK_FilmCopies", x => x.FilmCopyId);
                     table.ForeignKey(
-                        name: "FK_FilmCopy_Films_FilmId",
+                        name: "FK_FilmCopies_Films_FilmId",
                         column: x => x.FilmId,
                         principalTable: "Films",
                         principalColumn: "FilmId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FilmCopy_Filmstudios_FilmstudioId",
+                        name: "FK_FilmCopies_Filmstudios_FilmstudioId",
                         column: x => x.FilmstudioId,
                         principalTable: "Filmstudios",
                         principalColumn: "Id",
@@ -228,12 +228,17 @@ namespace Filmstudion.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FilmStudioId", "FilmStudioId1", "IsAdmin", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "14506b8f-3185-4aed-8e8c-512fe265b219", "hej@hej.se", false, "1", null, true, false, null, null, null, null, null, false, "Admin", "612f2a42-2b66-4b80-98b5-94e1b9b7d11f", false, "Göttwald" });
+                values: new object[] { "1", 0, "455b16b6-c71d-4c1d-9c70-b8f34f7ac37c", "hej@hej.se", false, "1", null, true, false, null, null, null, null, null, false, "Admin", "0bb3b7b2-191d-46e7-8217-632c892a340b", false, "Göttwald" });
+
+            migrationBuilder.InsertData(
+                table: "FilmCopies",
+                columns: new[] { "FilmCopyId", "FilmId", "FilmsId", "FilmsStudioId", "FilmstudioId", "RentedOut" },
+                values: new object[] { 1, null, 1, "1", null, true });
 
             migrationBuilder.InsertData(
                 table: "Films",
                 columns: new[] { "FilmId", "Country", "Director", "Name", "ReleaseDate" },
-                values: new object[] { 1, "Swe", "Kalle", "HejHej", new DateTime(2022, 2, 10, 14, 16, 52, 818, DateTimeKind.Local).AddTicks(8378) });
+                values: new object[] { 1, "Swe", "Kalle", "HejHej", new DateTime(2022, 2, 11, 11, 47, 23, 60, DateTimeKind.Local).AddTicks(6204) });
 
             migrationBuilder.InsertData(
                 table: "Filmstudios",
@@ -283,13 +288,13 @@ namespace Filmstudion.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_FilmCopy_FilmId",
-                table: "FilmCopy",
+                name: "IX_FilmCopies_FilmId",
+                table: "FilmCopies",
                 column: "FilmId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FilmCopy_FilmstudioId",
-                table: "FilmCopy",
+                name: "IX_FilmCopies_FilmstudioId",
+                table: "FilmCopies",
                 column: "FilmstudioId");
         }
 
@@ -311,7 +316,7 @@ namespace Filmstudion.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "FilmCopy");
+                name: "FilmCopies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

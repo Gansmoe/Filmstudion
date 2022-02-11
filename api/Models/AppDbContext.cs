@@ -8,6 +8,7 @@ namespace Filmstudion.api.Models
     {
         public DbSet<Filmstudio> Filmstudios {get; set;}
         public DbSet<Film> Films {get; set;}
+        public DbSet<FilmCopy> FilmCopies {get; set;}
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) => this.Database.EnsureCreated();
@@ -47,6 +48,14 @@ namespace Filmstudion.api.Models
                 Director = "Kalle",
                 Name = "HejHej",
                 ReleaseDate = System.DateTime.Now
+            });
+
+            builder.Entity<FilmCopy>().HasData(new FilmCopy
+            {
+                FilmCopyId = 1,
+                FilmsId = 1,
+                FilmsStudioId = "1",
+                RentedOut = true,
             });
     }
     }

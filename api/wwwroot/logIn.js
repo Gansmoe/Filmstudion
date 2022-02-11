@@ -52,6 +52,7 @@ function logIn(user, psw) {
         Password: psw
     }
     const getData = async () => {
+        
         const response = await fetch(url + "/api/users/authenticate", {
             method: 'POST',
             headers: {'Content-type': 'application/json; charset=UTF-8'},
@@ -67,7 +68,15 @@ function logIn(user, psw) {
 
         localStorage.setItem("token", token);
 
-        showWelcomePage();
+        if (token != null)
+        {
+            showWelcomePage();
+        }
+        else
+        {
+            showErrorPage();
+        }
+        
     }
     getData();
 };
@@ -77,8 +86,6 @@ function showWelcomePage() {
     const getData = () => {
 
         const menuBar = document.getElementById("menuBar");
-        /* createDiv();
-        const div = document.getElementById("div"); */
 
 
         const logOut = document.createElement("button");
@@ -103,6 +110,30 @@ function showWelcomePage() {
     }
     getData();
 
+}
+
+function showErrorPage() {
+    createDiv();
+    const div = document.getElementById("div");
+
+    const failedText = document.createElement("p");
+    const text = document.createTextNode("Fel lösenord eller användarnamn, vänligen försök igen");
+    failedText.appendChild(text);
+    div.appendChild(failedText);
+
+    const backBtn = document.createElement("button");
+    const btnText = document.createTextNode("Tillbaka");
+    backBtn.appendChild(btnText);
+    div.appendChild(backBtn);
+
+    const body = document.getElementById("body");
+    body.appendChild(div);
+
+    backBtn.addEventListener("click", function () {
+        deleteDiv();
+        loginPage();
+
+    })
 }
 
 function createDiv() {

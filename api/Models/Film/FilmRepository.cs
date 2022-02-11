@@ -31,11 +31,13 @@ namespace Filmstudion.api.Models
             for(int i = 0; i < number; i++)
             {
                 Random rnd = new Random();
-                var filmCopy = new FilmCopy();
-                filmCopy.FilmsId = film.FilmId;
-                filmCopy.RentedOut = false;
-                filmCopy.FilmsStudioId = "";
-                filmCopy.FilmCopyId = rnd.Next(1, 999999);
+                var filmCopy = new FilmCopy
+                {
+                    FilmsId = film.FilmId,
+                    RentedOut = false,
+                    FilmsStudioId = "",
+                    FilmCopyId = rnd.Next(1, 999999)
+                };
                 film.FilmCopies.Add(filmCopy);
             }
             return film;
@@ -51,13 +53,26 @@ namespace Filmstudion.api.Models
 
         public async Task<IEnumerable<Film>> ListAsync()
         {
-            return await _appDbContext.Films.ToListAsync();
+            List<Film> films = await _appDbContext.Films.ToListAsync();
+
+            for (int i = 0;i < films.Count;i++)
+            {
+                films[i].FilmCopies = _appDbContext.FilmCopies.Where(f => f.FilmsId == films[i].FilmId).ToList();
+            }
+
+            return films;
         }
 
         public async Task<Film> FilmAsync(int id)
         {
             IQueryable<Film> query = _appDbContext.Films.Where(r => r.FilmId == id);
-            return await query.FirstOrDefaultAsync();
+
+            Film film = await query.FirstOrDefaultAsync();
+            film.FilmCopies = _appDbContext.FilmCopies.Where(f => f.FilmsId == film.FilmId).ToList();
+            
+
+            return film;
+            
         }
 
         public async Task UpdateFilmAsync(Film film, JsonPatchDocument model)

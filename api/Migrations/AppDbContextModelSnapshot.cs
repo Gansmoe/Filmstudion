@@ -45,7 +45,7 @@ namespace Filmstudion.Migrations
                             Country = "Swe",
                             Director = "Kalle",
                             Name = "HejHej",
-                            ReleaseDate = new DateTime(2022, 2, 10, 14, 16, 52, 818, DateTimeKind.Local).AddTicks(8378)
+                            ReleaseDate = new DateTime(2022, 2, 11, 11, 47, 23, 60, DateTimeKind.Local).AddTicks(6204)
                         });
                 });
 
@@ -76,7 +76,16 @@ namespace Filmstudion.Migrations
 
                     b.HasIndex("FilmstudioId");
 
-                    b.ToTable("FilmCopy");
+                    b.ToTable("FilmCopies");
+
+                    b.HasData(
+                        new
+                        {
+                            FilmCopyId = 1,
+                            FilmsId = 1,
+                            FilmsStudioId = "1",
+                            RentedOut = true
+                        });
                 });
 
             modelBuilder.Entity("Filmstudion.api.Models.Filmstudio", b =>
@@ -201,7 +210,7 @@ namespace Filmstudion.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14506b8f-3185-4aed-8e8c-512fe265b219",
+                            ConcurrencyStamp = "455b16b6-c71d-4c1d-9c70-b8f34f7ac37c",
                             Email = "hej@hej.se",
                             EmailConfirmed = false,
                             FilmStudioId = "1",
@@ -209,7 +218,7 @@ namespace Filmstudion.Migrations
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "612f2a42-2b66-4b80-98b5-94e1b9b7d11f",
+                            SecurityStamp = "0bb3b7b2-191d-46e7-8217-632c892a340b",
                             TwoFactorEnabled = false,
                             UserName = "Göttwald"
                         });
